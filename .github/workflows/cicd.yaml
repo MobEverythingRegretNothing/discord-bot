@@ -1,0 +1,52 @@
+name: CICD Pipeline
+on: 
+  push:
+    branches:
+      - master
+env: 
+  AWS_REGION: "us-east-2"
+permissions: 
+  id-token: write
+  contents: read
+
+jobs: 
+  build: 
+    runs-on: ubuntu-latest
+
+    steps:
+
+    # Load source code from repo into runner VM
+    - name: Checkout Source Code
+      uses: actions/checkout@v2 
+
+    #######################
+    #   Github OIDC Auth  #
+    ###############################################################                       
+    # Github used as a federated identity provider                #
+    # Github actions grabs short lived JWT for AWS Authentication #
+    ###############################################################
+    - name: Configure AWS OIDC Role
+      uses: aws-actions/configure-aws-credentials@v1
+      with:  
+        role-to-assume: arn:aws:iam::144784376972:role/github-oidc-cdk
+        role-session-name: deploySession
+        aws-region: ${{ env.AWS_REGION }}
+    
+    #########################
+    #   Application Build   #
+    ####################################################
+    # Build any application code (EC2 & Lambda) that   #
+    # needs to be deployed with the infrastructure     #
+    ####################################################
+    - name: Install Dependencies
+      run: yarn
+
+    ###############
+    #  CDK Deploy #
+    #############################################################
+    # Creates a cloudformation template via the Typescript CDK  #
+    # and deploys the template to AWS.                          #
+    #     NOTE: Github Actions provides AWS CLI by default      #
+    #############################################################
+    - name: Deploy Infrastructure (AWS CDK)
+      run: cdk deploy -- all --require-approval never 
