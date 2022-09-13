@@ -48,5 +48,5 @@ jobs:
     # and deploys the template to AWS.                          #
     #     NOTE: Github Actions provides AWS CLI by default      #
     #############################################################
-    - name: Deploy Infrastructure (AWS CDK)
-      run: cdk deploy -- all --require-approval never 
+    # - name: Deploy Infrastructure (AWS CDK)
+    #   run: cdk deploy -- all --require-approval never 
