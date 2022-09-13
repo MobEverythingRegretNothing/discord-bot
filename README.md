@@ -14,7 +14,7 @@ A discord bot for the boneyard (Flamed Retardant)
   * Write DynamoDB client for storing event
   * Store Bot Secrets in AWS
   * Can Alex access my AWS through roles?
-  * Write CDK code to spin up infrastructure
+  * Write CDK code to spin up infrastructure (For the Spandex App)
 * Application
   * Write Docker files for application
   * Write other event handlers
