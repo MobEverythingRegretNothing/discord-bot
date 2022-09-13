@@ -1,9 +1,13 @@
-# discord-bot
+## Infrastructure
 
-A discord bot for the boneyard (Flamed Retardant)
+The infrastructure for this project will be created using AWS CDK. All relevant resources can be found in the `infra` folder. See [The README](./infra/Infrastructure.md) for more info.
+
+## Application
+
+The primary application in this repo is **`Spandex Unchained`**, a discord bot that monitors the discord WebSocket API for the Boneyard.
 
 
-## TODO
+## Work To-do
 
 * Local Testing w/Docker
   * Spin up bot in local image
@@ -14,7 +18,7 @@ A discord bot for the boneyard (Flamed Retardant)
   * Write DynamoDB client for storing event
   * Store Bot Secrets in AWS
   * Can Alex access my AWS through roles?
-  * Write CDK code to spin up infrastructure
+  * Write CDK code to spin up infrastructure (For the Spandex App)
 * Application
   * Write Docker files for application
   * Write other event handlers
@@ -27,4 +31,4 @@ A discord bot for the boneyard (Flamed Retardant)
 
 ## Resources
 
-(Eris Docs)[https://abal.moe/Eris/docs/0.16.1]
+* [Eris (Discord Library) Docs](https://abal.moe/Eris/docs/0.16.1)
