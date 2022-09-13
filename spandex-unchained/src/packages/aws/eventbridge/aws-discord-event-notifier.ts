@@ -1,7 +1,7 @@
 import { EventBridgeClient, PutEventsCommandInput, PutEventsCommand, PutEventsCommandOutput } from '@aws-sdk/client-eventbridge';
-import { MessageEventNotificationError } from "src/packages/config/error/message-event-notification-error";
-import { DiscordEventNotifier } from 'src/discord-event-notifier';
-import { DiscordEvent } from 'src/packages/discord/discord-event';
+import { MessageEventNotificationError } from "../../config/error/message-event-notification-error";
+import { DiscordEventNotifier } from '../../../discord-event-notifier';
+import { DiscordEvent } from '../../discord/discord-event';
 
 export class AwsDiscordEventNotifier implements DiscordEventNotifier {
 
@@ -31,8 +31,8 @@ export class AwsDiscordEventNotifier implements DiscordEventNotifier {
 
         // Send to Subscribers via AWS EventBridge
         return this.client.send(new PutEventsCommand(input))
-            .then(() => {
-                console.log(`Successfully sent Message Event`);
+            .then((output: PutEventsCommandOutput) => {
+                console.log(`Successfully sent ${output.Entries?.length ?? 'Unknown' } Message Event`);
             })
             .catch(error => {
                 throw new MessageEventNotificationError('Failed to send message notification event', event.type, event.id).withCause(error);

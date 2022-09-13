@@ -1,6 +1,6 @@
-import { DiscordEventNotifier } from "src/discord-event-notifier";
-import { AwsDiscordEventNotifier } from "src/packages/aws/eventbridge/aws-discord-event-notifier";
-import { SpandexUnchained } from "src/spandex-unchained";
+import { DiscordEventNotifier } from "../discord-event-notifier";
+import { AwsDiscordEventNotifier } from "../packages/aws/eventbridge/aws-discord-event-notifier";
+import { SpandexUnchained } from "../spandex-unchained";
 
 /**
  * This is the entry point for the AWS EC2 Application. All configuration and implementations should be constructed as if deployed 
@@ -20,8 +20,11 @@ configure()
 async function configure(): Promise<SpandexUnchained> {
     console.log(`Configuring Spandex Unchained for an AWS Environment...`);
 
-    const notifier: DiscordEventNotifier = new AwsDiscordEventNotifier
+    const region: string = process.env['awsRegion'] ?? 'us-east-1';
+    const eventBusName: string = process.env['eventBusName'] ?? 'None';
 
-    return new SpandexUnchained()
+    const notifier: DiscordEventNotifier = new AwsDiscordEventNotifier(region, eventBusName);
+
+    return new SpandexUnchained(notifier, )
 
 }

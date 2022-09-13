@@ -9,7 +9,7 @@
   "packageManager": "yarn@1.22.11",
   "license": "MIT",
   "scripts": {
-    "start:local": "ts-node ./src/discord-monitor.ts"
+    "start:local": "ts-node ./src/app/app-local.ts"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.169.0",

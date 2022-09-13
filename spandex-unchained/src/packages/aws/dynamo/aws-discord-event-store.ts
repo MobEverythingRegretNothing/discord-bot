@@ -1,6 +1,6 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { DiscordEventStore } from "src/discord-event-store";
-import { DiscordEvent } from "src/packages/discord/discord-event";
+import { DiscordEventStore } from "../../../discord-event-store";
+import { DiscordEvent } from "../../discord/discord-event";
 
 export class AwsDiscordEventStore implements DiscordEventStore {
 
