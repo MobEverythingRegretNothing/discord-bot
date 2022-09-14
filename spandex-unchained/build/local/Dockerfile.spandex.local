@@ -1,1 +1,22 @@
 # Docker Image for Local Testing Spandex Unchained
+FROM public.ecr.aws/amazonlinux/amazonlinux:latest
+
+ENV NODE_VERSION=16.x
+RUN yum -y install tar gzip
+
+RUN curl -sL https://rpm.nodesource.com/setup_${NODE_VERSION} | bash
+
+RUN yum -y install nodejs
+RUN npm install -g yarn
+
+WORKDIR /app
+
+COPY . .
+
+WORKDIR /app/spandex-unchained
+
+RUN yarn install
+
+#EXPOSE 8080
+
+CMD ["npm", "run", "start:local"]
