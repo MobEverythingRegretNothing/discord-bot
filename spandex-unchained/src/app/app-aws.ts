@@ -20,7 +20,7 @@ configure()
 async function configure(): Promise<SpandexUnchained> {
     console.log(`Configuring Spandex Unchained for an AWS Environment...`);
 
-    const region: string = process.env['awsRegion'] ?? 'us-east-1';
+    const region: string = process.env['awsRegion'] ?? 'us-east-2';
     const eventBusName: string = process.env['eventBusName'] ?? 'None';
 
     const notifier: DiscordEventNotifier = new AwsDiscordEventNotifier(region, eventBusName);
