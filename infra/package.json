@@ -8,7 +8,6 @@
   "displayName": "Spandex Unchained Discord Bot Infrastructure",
   "packageManager": "yarn@1.22.11",
   "license": "MIT",
-  "scripts": {},
   "dependencies": {
     "aws-cdk": "^2.41.0",
     "aws-cdk-lib": "^2.41.0",
