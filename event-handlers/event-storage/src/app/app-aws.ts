@@ -1,5 +1,5 @@
-import { DiscordEventStore } from "src/discord-event-store";
-import { AwsDiscordEventStore } from "src/packages/aws/dynamo/aws-discord-event-store";
+import { DiscordEventStore } from "../discord-event-store";
+import { AwsDiscordEventStore } from "../packages/aws/dynamo/aws-discord-event-store";
 
 
 /**
@@ -8,7 +8,7 @@ import { AwsDiscordEventStore } from "src/packages/aws/dynamo/aws-discord-event-
  * Elements:
  *      | AWS SecretsManager: All secrets should be pulled from here
  *      | AWS EventBridge: Pub/Sub Notifications should be received from the bot EventBridge
- *      | AWS DynamoDB: Event Storage
+ *      | AWS DynamoDB: Event Storage Database
  **/
 
 export async function handler(_event: any, _context: any): Promise<void> {

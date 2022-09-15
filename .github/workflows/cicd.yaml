@@ -1,6 +1,6 @@
 name: CICD Pipeline
 on: 
-  workflow_dispatch:
+  workflow_dispatch:  # Trigger only manually from Github Actions (With Inputs)
     inputs:
       awsRegion:
         description: 'AWS Region to deploy to (ex. us-east-2)'
@@ -20,10 +20,10 @@ on:
         - Production-Charles
         - Production-Alex
   
-
+# Set permissions for runner 
 permissions: 
-  id-token: write
-  contents: read
+  contents: read  #(required for pulling code down)
+  id-token: write #(required for OIDC)
 
 jobs: 
   build: 
