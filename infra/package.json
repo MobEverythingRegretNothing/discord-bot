@@ -10,6 +10,7 @@
   "license": "MIT",
   "scripts": {},
   "dependencies": {
+    "aws-cdk": "^2.41.0",
     "aws-cdk-lib": "^2.41.0",
     "constructs": "^10.1.101"
   },
