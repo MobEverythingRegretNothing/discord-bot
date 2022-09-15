@@ -1,11 +1,4 @@
-import { App, Environment } from "aws-cdk-lib";
-
-export function getAwsEnvironmentConfig(app: App): Environment {
-    return {
-        account: env(app, 'awsAccount'),
-        region:  env(app, 'awsRegion')
-    }
-}
+import { App } from "aws-cdk-lib";
 
 export function getBotToken(app: App): string {
     return env(app, 'botToken');

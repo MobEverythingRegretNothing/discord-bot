@@ -1,5 +1,5 @@
-import { App, Environment } from "aws-cdk-lib";
-import { getAwsEnvironmentConfig, getBotToken } from "../lib/config/environment-config";
+import { App } from "aws-cdk-lib";
+import { getBotToken } from "../lib/config/environment-config";
 import { EventPublisherStack } from "../lib/stacks/event-publisher-stack";
 import { EventStoreStack } from "../lib/stacks/event-store-stack";
 import { SpandexStack } from "../lib/stacks/spandex-stack";
@@ -11,7 +11,6 @@ const app: App = new App();
  * 
  *  - botToken      | Discord token for the bot
  */
-const awsEnvironment: Environment = getAwsEnvironmentConfig(app);
 const token: string = getBotToken(app);
 
 const eventStoreStack: EventStoreStack = new EventStoreStack(app, 'EventStoreStack', 
