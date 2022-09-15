@@ -12,13 +12,13 @@ on:
           - us-east-2
           - us-west-1
           - us-west-2
-    environment:
-      description: 'Which GitHub environment to use for deploy'
-      required: true
-      type: choice
-      options:
-        - Production-Charles
-        - Production-Alex
+      environment:
+        description: 'Which GitHub environment to use for deploy'
+        required: true
+        type: choice
+        options:
+          - Production-Charles
+          - Production-Alex
   
 # Set permissions for runner 
 permissions: 
