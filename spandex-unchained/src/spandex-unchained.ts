@@ -1,6 +1,5 @@
 import Eris, { Client, Message } from "eris";
 import { DiscordEventNotifier } from "./discord-event-notifier";
-import { DiscordConfig } from "./packages/discord/discord-config";
 import { DiscordEvent } from "./packages/discord/discord-event";
 import { mapMessageEvent } from "./packages/discord/discord-event-mapper";
 
@@ -13,18 +12,18 @@ import { mapMessageEvent } from "./packages/discord/discord-event-mapper";
  */
 export class SpandexUnchained {
 
-    readonly notifier: DiscordEventNotifier;
+    private readonly notifier: DiscordEventNotifier;
 
-    readonly config: DiscordConfig;
+    private readonly botToken: string;
 
-    constructor(notifier: DiscordEventNotifier, config: DiscordConfig) {
+    constructor(notifier: DiscordEventNotifier, botToken: string) {
         this.notifier = notifier;
-        this.config = config;
+        this.botToken = botToken;
     }
 
     run(): void {
         try {
-            const spandex: Client = Eris(this.config.token);
+            const spandex: Client = Eris(this.botToken);
 
             spandex.on("ready",  () => {
                 console.log("Spandex is Unchained");

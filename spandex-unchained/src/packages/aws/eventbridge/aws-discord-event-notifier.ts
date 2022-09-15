@@ -30,7 +30,8 @@ export class AwsDiscordEventNotifier implements DiscordEventNotifier {
 
         return this.client.send(new PutEventsCommand(input))
             .then((output: PutEventsCommandOutput) => {
-                console.log(`Successfully sent ${output.Entries?.length ?? 'Unknown' } Message Event`);
+                console.log(`Successfully sent Message Event to Event Bus ${this.eventBusName}`);
+                console.log(`Event ID: ${output?.Entries?.at(0)?.EventId ?? 'None'}`)
             })
             .catch(error => {
                 throw new MessageEventNotificationError('Failed to send message notification event', event.type, event.id).withCause(error);

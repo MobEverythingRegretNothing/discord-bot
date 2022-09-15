@@ -21,11 +21,10 @@ async function configure(): Promise<SpandexUnchained> {
     const region: string = process.env['awsRegion'] ?? 'us-west-2';
     const eventBusName: string = process.env['eventBusName'] ?? 'None';
 
-    const clientId: string = process.env['botClientId']!;
     const token: string = process.env['botToken']!;
 
     const notifier: DiscordEventNotifier = new AwsDiscordEventNotifier(region, eventBusName);
 
-    return new SpandexUnchained(notifier, {clientId, token});
+    return new SpandexUnchained(notifier, token);
 
 }

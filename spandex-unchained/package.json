@@ -9,7 +9,8 @@
   "packageManager": "yarn@1.22.11",
   "license": "MIT",
   "scripts": {
-    "start:local": "ts-node ./src/app/app-local.ts"
+    "start:local": "ts-node ./src/app/app-local.ts",
+    "start:aws": "ts-node ./src/app/aws-aws.ts"
   },
   "dependencies": {
     "@aws-sdk/client-eventbridge": "^3.169.0",
