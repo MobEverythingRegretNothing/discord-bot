@@ -5,19 +5,18 @@ import { DiscordEvent } from '../../discord/discord-event';
 
 export class AwsDiscordEventNotifier implements DiscordEventNotifier {
 
-    readonly client: EventBridgeClient;
+    private readonly client: EventBridgeClient;
 
-    readonly eventBusName: string;
+    private readonly eventBusName: string;
 
     constructor(region: string, eventBusName: string) {
         this.client = new EventBridgeClient({region});
         this.eventBusName = eventBusName;
     }
 
-    async notify(event: DiscordEvent): Promise<void> {
+    public async notify(event: DiscordEvent): Promise<void> {
         console.log(`Sending Discord Event to AwsEventBridge for Pub/Sub`);
 
-        // Create Message Event
         const input: PutEventsCommandInput = {
             Entries: [
                 {
@@ -29,7 +28,6 @@ export class AwsDiscordEventNotifier implements DiscordEventNotifier {
             ]
         };
 
-        // Send to Subscribers via AWS EventBridge
         return this.client.send(new PutEventsCommand(input))
             .then((output: PutEventsCommandOutput) => {
                 console.log(`Successfully sent ${output.Entries?.length ?? 'Unknown' } Message Event`);

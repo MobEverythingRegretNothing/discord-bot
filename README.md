@@ -1,6 +1,6 @@
 ## Infrastructure
 
-The infrastructure for this project will be created using AWS CDK. All relevant resources can be found in the `infra` folder. See [The README](./infra/Infrastructure.md) for more info.
+The infrastructure for this project will be created using AWS CDK. All relevant resources can be found in the `infra` folder. See [The README](./infra/docs/Infrastructure.md) for more info.
 
 ## Application
 

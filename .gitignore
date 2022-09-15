@@ -107,3 +107,7 @@ dist
 .tern-port
 spandex-unchained/src/packages/config/local/client.ts
 spandex-unchained/src/packages/config/local/token.ts
+
+# CDK Files
+infra/cdk.context.json
+infra/cdk.out/

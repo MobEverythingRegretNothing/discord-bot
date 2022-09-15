@@ -1,11 +1,11 @@
 {
-  "description": "Infrastructure project for the discord bot (AWS CDK)",
+  "description": "Infrastructure project for the Spandex Unchained discord bot and any related applications",
   "version": "1.0.0",
   "author": {
     "name": "Charles",
     "email": "crrathe@gmail.com"
   },
-  "displayName": "Discord Infra",
+  "displayName": "Spandex Unchained Discord Bot Infrastructure",
   "packageManager": "yarn@1.22.11",
   "license": "MIT",
   "scripts": {},

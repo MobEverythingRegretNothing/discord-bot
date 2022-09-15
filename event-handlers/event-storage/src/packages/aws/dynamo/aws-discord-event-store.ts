@@ -4,16 +4,16 @@ import { DiscordEvent } from "../../discord/discord-event";
 
 export class AwsDiscordEventStore implements DiscordEventStore {
 
-    readonly client: DynamoDBClient;
+    private readonly client: DynamoDBClient;
 
-    readonly storeName: string;
+    private readonly storeName: string;
 
     constructor(region: string, storeName: string) {
         this.client = new DynamoDBClient({region});
         this.storeName = storeName;
     }
 
-    store(event: DiscordEvent): Promise<void> {
+    public store(event: DiscordEvent): Promise<void> {
         throw new Error("Method not implemented.");
     }
 

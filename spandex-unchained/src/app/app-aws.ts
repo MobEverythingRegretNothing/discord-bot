@@ -9,9 +9,7 @@ import { SpandexUnchained } from "../spandex-unchained";
  * Elements:
  *      | AWS SecretsManager: All secrets should be pulled from here
  *      | AWS EventBridge: Pub/Sub Notifications should be sent out through EventBridge
- *      | AWS DynamoDB: Data Storage should be sent to a DynamoDB table
  **/
-
 configure()
     .then(spandex => {
         spandex.run()
@@ -20,11 +18,14 @@ configure()
 async function configure(): Promise<SpandexUnchained> {
     console.log(`Configuring Spandex Unchained for an AWS Environment...`);
 
-    const region: string = process.env['awsRegion'] ?? 'us-east-2';
+    const region: string = process.env['awsRegion'] ?? 'us-west-2';
     const eventBusName: string = process.env['eventBusName'] ?? 'None';
+
+    const clientId: string = process.env['botClientId']!;
+    const token: string = process.env['botToken']!;
 
     const notifier: DiscordEventNotifier = new AwsDiscordEventNotifier(region, eventBusName);
 
-    return new SpandexUnchained(notifier, )
+    return new SpandexUnchained(notifier, {clientId, token});
 
 }

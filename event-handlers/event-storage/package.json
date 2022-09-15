@@ -1,0 +1,17 @@
+{
+  "name": "event-storage",
+  "version": "1.0.0",
+  "description": "Storage function to save events to database (as a side-effect)",
+  "main": "lambda.ts",
+  "author": "Charles Rathe",
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.169.0",
+    "@aws-sdk/client-secrets-manager": "^3.169.0",
+    "luxon": "3.0.3"
+  },
+  "devDependencies": {
+    "@types/luxon": "^3.0.1",
+    "@types/node": "^18.7.18"
+  }
+}

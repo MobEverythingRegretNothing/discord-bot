@@ -1,5 +1,5 @@
-import { DiscordEventStore } from "../../discord-event-store";
-import { DiscordEvent } from "../discord/discord-event";
+import { DiscordEventStore } from "../discord-event-store";
+import { DiscordEvent } from "../../../../spandex-unchained/src/packages/discord/discord-event";
 
 export class ConsoleEventStore implements DiscordEventStore {
     store(event: DiscordEvent): Promise<void> {
