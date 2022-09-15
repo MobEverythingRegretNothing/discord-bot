@@ -56,7 +56,9 @@ jobs:
     ####################################################
     - name: Install Dependencies
       working-directory: infra
-      run: yarn
+      run: |
+        yarn install
+        ls -a
 
     ###############
     #  CDK Synth  #
