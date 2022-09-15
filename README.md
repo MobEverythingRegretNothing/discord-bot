@@ -1,6 +1,6 @@
 ## Infrastructure
 
-The infrastructure for this project will be created using AWS CDK. All relevant resources can be found in the `infra` folder. See [The README](./infra/Infrastructure.md) for more info.
+The infrastructure for this project will be created using AWS CDK. All relevant resources can be found in the `infra` folder. See [The README](./infra/docs/Infrastructure.md) for more info.
 
 ## Application
 
@@ -15,16 +15,11 @@ The primary application in this repo is **`Spandex Unchained`**, a discord bot t
       * Docker Image
     * Spin up local pub/sub framework (LocalStack or mock)
 * AWS
-  * Write DynamoDB client for storing event
-  * Store Bot Secrets in AWS
-  * Can Alex access my AWS through roles?
   * Write CDK code to spin up infrastructure (For the Spandex App)
 * Application
   * Write Docker files for application
   * Write other event handlers
-* CICD
-    * Write Github action for deploying to AWS 
-      * Can we choose AWS Account
+  * Error Handling/Logging
 
 * AWS X-Ray?
 

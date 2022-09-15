@@ -1,17 +1,34 @@
 name: CICD Pipeline
 on: 
-  push:
-    branches:
-      - main
-env: 
-  AWS_REGION: "us-west-2"
+  workflow_dispatch:  # Trigger only manually from Github Actions (With Inputs)
+    inputs:
+      awsRegion:
+        description: 'AWS Region to deploy to (ex. us-east-2)'
+        required: false
+        default: us-west-2
+        type: choice
+        options:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+    environment:
+      description: 'Which GitHub environment to use for deploy'
+      required: true
+      type: choice
+      options:
+        - Production-Charles
+        - Production-Alex
+  
+# Set permissions for runner 
 permissions: 
-  id-token: write
-  contents: read
+  contents: read  #(required for pulling code down)
+  id-token: write #(required for OIDC)
 
 jobs: 
   build: 
     runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
 
     steps:
 
@@ -28,8 +45,8 @@ jobs:
     - name: Configure AWS OIDC Role
       uses: aws-actions/configure-aws-credentials@v1
       with:  
-        role-to-assume: arn:aws:iam::144784376972:role/github-oidc-cdk
-        aws-region: us-west-2
+        role-to-assume: ${{ secrets.OIDC_ROLE}}
+        aws-region: ${{ github.event.inputs.awsRegion }}
     
     #########################
     #   Application Build   #
@@ -41,11 +58,21 @@ jobs:
       run: yarn
 
     ###############
-    #  CDK Deploy #
+    #  CDK Synth  #
     #############################################################
     # Creates a cloudformation template via the Typescript CDK  #
-    # and deploys the template to AWS.                          #
+    # and allows utilization of context.                        #
     #     NOTE: Github Actions provides AWS CLI by default      #
+    #     NOTE: Synth comes before Deploy in the cdk lifecycle  #
+    #############################################################
+    - name: Synthesize Infrastructure w/Context (AWS CDK)
+      run: cdk synth --context botToken=${{secrets.BOT_TOKEN}}
+
+    ###############
+    #  CDK Deploy #
+    #############################################################
+    # Deploys the CloudFormation template from the previous     #
+    # to AWS in order to generate the Stacks.                   #
     #############################################################
     # - name: Deploy Infrastructure (AWS CDK)
-    #   run: cdk deploy -- all --require-approval never 
+    #   run: cdk deploy --all --require-approval never 

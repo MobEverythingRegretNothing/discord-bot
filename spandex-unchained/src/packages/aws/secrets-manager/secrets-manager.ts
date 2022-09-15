@@ -2,13 +2,13 @@ import { SecretsManagerClient, GetSecretValueCommand, GetSecretValueCommandInput
 
 export class SecretsManager {
 
-    readonly client: SecretsManagerClient;
+    private readonly client: SecretsManagerClient;
 
     constructor(region: string) {
         this.client = new SecretsManagerClient({region});
     }
 
-    async get(secret: string): Promise<any> {
+    public async get(secret: string): Promise<any> {
         const input: GetSecretValueCommandInput = {
             SecretId: secret
         };

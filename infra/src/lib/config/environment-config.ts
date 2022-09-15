@@ -1,16 +1,13 @@
-import { Environment } from "aws-cdk-lib";
+import { App } from "aws-cdk-lib";
 
-export function getAwsEnvironmentConfig(): Environment {
-    return {
-        account: env('awsAccount'),
-        region: env('awsRegion')
-    }
+export function getBotToken(app: App): string {
+    return env(app, 'botToken');
 }
 
-function env(paramName: string): string {
-    if (process.env[paramName] === undefined) {
-        throw new Error(`Environment Variable ${paramName} is undefined, please see CICD pipeline`)
+function env(app: App, paramName: string): string {
+    if (app.node.tryGetContext(paramName) === undefined) {
+        throw new Error(`Context Variable ${paramName} is undefined, please see CICD pipeline`)
     } else {
-        return process.env[paramName]!;
+        return app.node.tryGetContext(paramName)!;
     }
 }

@@ -8,8 +8,34 @@ The infrastructure portion of the project is meant to build the CDK *Cloudformat
 The `/src` folder contains all the necessary typescript files to generate the templates. `/bin` contains the top level file which when run generates the template. The `/lib` folder contains all helper files including [Stacks](https://docs.aws.amazon.com/cdk/v2/guide/stacks.html), which are the primary siloing mechanic of code as well as [Constructs](https://docs.aws.amazon.com/cdk/v2/guide/constructs.html) which are more abritrary groupings of like infrastructure
 
     /src
+     | - /docs
      | - /bin
      | - /lib
+     | - /cdk.out*
+
+*Note: the `cdk.out` folder will generate when doing a cdk synth or deploy. It is where the AWS CDK puts the completed build artifacts*
+
+## Working Locally
+
+1. Create an IAM User that will be used for local development
+   * Give the IAM User `Administrator` Permissions
+   * Save off the credentials
+2. Install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html). 
+3. Use `aws configure` to input the credentials you built in step 1
+4. Install the aws-cdk globally to use the CLI tool (npm/yarn global install `aws-cdk`)
+5. Create a `cdk.context.json` file in the infra folder with the following format
+
+```js
+{
+    "botToken": "<Bot Token Here>"
+}
+```
+
+*or*
+
+You can run `cdk synth` with a `--context` flag to pass in the bot token
+
+6. Now you should be able to run `cdk synth` to test the construction of the CloudFormation templates that correspond to the stacks.
 
 ## Generated Infrastructure
 ---
@@ -40,4 +66,8 @@ This project consists of a few key parts
 
 
 
-![](./docs/SpandexUnchained.drawio.png)
+![](./SpandexUnchained.drawio.png)
+
+## Resources
+
+* [CDK CLI Reference](https://docs.aws.amazon.com/cdk/v2/guide/cli.html)
