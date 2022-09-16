@@ -18,3 +18,15 @@
   }
 ]
 ```
+
+## Local Testing
+
+  Using Docker you can spin up a local DynamoDB. See the package.json for scripts related to Docker. See the /build folder for the Docker Compose files.
+
+* [https://docs.aws.amazon.com/cli/latest/reference/dynamodb/index.html](DynamoDB CLI Reference)
+  
+  
+## Todo
+
+* Learn how to configure docker DynamoDB locally to match schema in AWS
+* Determine best structure/indices for searching

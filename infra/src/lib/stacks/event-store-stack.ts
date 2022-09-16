@@ -7,7 +7,7 @@ import { EventBus } from 'aws-cdk-lib/aws-events';
  */
 export class EventStoreStack extends Stack {
 
-    readonly eventStore: Table;
+    // readonly eventStore: Table;
 
     readonly targetBus: EventBus;
 
@@ -15,19 +15,19 @@ export class EventStoreStack extends Stack {
         super(scope, id, props);
 
         // Create DynamoDB database
-        this.eventStore = new Table(this, 'SpandexEventStore', {
-            tableName: 'SpandexEventStore', 
-            partitionKey: { name: 'id', type: AttributeType.STRING },
-            billingMode: BillingMode.PAY_PER_REQUEST,
-            sortKey: {name: 'timestamp', type: AttributeType.NUMBER }
-        });
+        // this.eventStore = new Table(this, 'SpandexEventStore', {
+        //     tableName: 'SpandexEventStore', 
+        //     partitionKey: { name: 'id', type: AttributeType.STRING },
+        //     billingMode: BillingMode.PAY_PER_REQUEST,
+        //     sortKey: {name: 'timestamp', type: AttributeType.NUMBER }
+        // });
 
-        this.eventStore.addGlobalSecondaryIndex({
-            indexName: 'contentIndex',
-            sortKey: {name: 'timestamp', type: AttributeType.STRING},
-            projectionType: ProjectionType.ALL,
-            partitionKey: { name: 'sourceUser', type: AttributeType.STRING }
-          });
+        // this.eventStore.addGlobalSecondaryIndex({
+        //     indexName: 'contentIndex',
+        //     sortKey: {name: 'timestamp', type: AttributeType.STRING},
+        //     projectionType: ProjectionType.ALL,
+        //     partitionKey: { name: 'sourceUser', type: AttributeType.STRING }
+        //   });
 
         // Create Target Event Bus to receive Discord Events
         this.targetBus = new EventBus(this, 'EventStoreTargetBus', {

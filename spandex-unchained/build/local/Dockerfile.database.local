@@ -1,5 +1,0 @@
-FROM public.ecr.aws/amazonlinux/amazonlinux:latest
-WORKDIR /app
-COPY . .
-RUN yarn install
-CMD ["ts-node", "src/app/spandex-unchained.ts"]

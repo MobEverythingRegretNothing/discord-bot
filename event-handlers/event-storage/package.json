@@ -5,6 +5,10 @@
   "main": "lambda.ts",
   "author": "Charles Rathe",
   "license": "MIT",
+  "scripts": {
+    "db:docker": "docker compose -f ./build/docker-compose.yaml up",
+    "db:docker:list": "aws dynamodb list-tables --endpoint-url http://localhost:8000"
+  },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.169.0",
     "@aws-sdk/client-secrets-manager": "^3.169.0",
