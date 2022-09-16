@@ -1,0 +1,61 @@
+{
+    "id": "f1306722-2577-4526-8e08-8bc89780d38e",
+    "type": "VoiceChannelLeave",
+    "timestamp": "2022-09-16T10:50:06.752-05:00",
+    "targetChannelId": "1020360878501146634",
+    "sourceUser": "snake-case-man",
+    "content": "snake-case-man left the second-voice channel",
+    "metadata": {
+        "member": {
+            "id": "195015042926641172",
+            "createdAt": 1466565609438,
+            "communicationDisabledUntil": null,
+            "joinedAt": 1662133122498,
+            "nick": null,
+            "pending": false,
+            "premiumSince": null,
+            "roles": [],
+            "user": {
+                "id": "195015042926641172",
+                "createdAt": 1466565609438,
+                "avatar": "ffb6c43609d01fa766c9de2dc22dfee6",
+                "bot": false,
+                "discriminator": "2089",
+                "publicFlags": 0,
+                "system": false,
+                "username": "snake-case-man"
+            },
+            "voiceState": {
+                "id": "195015042926641172",
+                "createdAt": 1466565609438,
+                "channelID": null,
+                "deaf": false,
+                "mute": false,
+                "requestToSpeakTimestamp": null,
+                "selfDeaf": false,
+                "selfMute": false,
+                "selfStream": false,
+                "selfVideo": false,
+                "sessionID": null,
+                "suppress": false
+            }
+        },
+        "channel": {
+            "id": "1020360878501146634",
+            "createdAt": 1663343390823,
+            "type": 2,
+            "name": "second-voice",
+            "nsfw": false,
+            "parentID": "1015284645161599048",
+            "permissionOverwrites": {},
+            "position": 1,
+            "bitrate": 64000,
+            "rtcRegion": null,
+            "userLimit": 0,
+            "voiceMembers": {},
+            "lastMessageID": null,
+            "messages": {},
+            "rateLimitPerUser": 0
+        }
+    }
+}

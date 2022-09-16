@@ -36,6 +36,15 @@ jobs:
     - name: Checkout Source Code
       uses: actions/checkout@v2 
 
+    ########################
+    #   Setup Environment  #
+    ####################################                    
+    # Load any global packages needed  #
+    ####################################
+    - name: Install AWS CDK CLI
+      shell: bash
+      run: npm install -g aws-cdk
+
     #######################
     #   Github OIDC Auth  #
     ###############################################################                       
@@ -58,14 +67,6 @@ jobs:
       working-directory: infra
       shell: bash
       run: yarn install --immutable --immutable-cache --check-cache
-
-    - name: GLOBAL INSTALL AWS-CDK
-      shell: bash
-      run: npm install -g aws-cdk
-
-    - name: Check version
-      shell: bash
-      run: cdk --version
 
     ###############
     #  CDK Synth  #

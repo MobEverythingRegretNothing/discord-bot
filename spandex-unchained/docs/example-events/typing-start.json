@@ -1,0 +1,68 @@
+{
+    "id": "fab0eda1-2211-4499-8538-d3771e415c03",
+    "type": "TypingStart",
+    "timestamp": "2022-09-16T11:01:59.113-05:00",
+    "targetChannelId": "1015284645161599049",
+    "sourceUser": "snake-case-man",
+    "content": "snake-case-man is typing...",
+    "metadata": {
+        "channel": {
+            "id": "1015284645161599049",
+            "createdAt": 1662133122483,
+            "type": 0,
+            "name": "general",
+            "parentID": "1015284645161599047",
+            "permissionOverwrites": {},
+            "position": 0,
+            "lastMessageID": "1020024116646002749",
+            "lastPinTimestamp": null,
+            "messages": {},
+            "rateLimitPerUser": 0,
+            "topic": null
+        },
+        "user": {
+            "id": "195015042926641172",
+            "createdAt": 1466565609438,
+            "avatar": "ffb6c43609d01fa766c9de2dc22dfee6",
+            "bot": false,
+            "discriminator": "2089",
+            "publicFlags": 0,
+            "system": false,
+            "username": "snake-case-man"
+        },
+        "member": {
+            "id": "195015042926641172",
+            "createdAt": 1466565609438,
+            "communicationDisabledUntil": null,
+            "joinedAt": 1662133122498,
+            "nick": null,
+            "pending": false,
+            "premiumSince": null,
+            "roles": [],
+            "user": {
+                "id": "195015042926641172",
+                "createdAt": 1466565609438,
+                "avatar": "ffb6c43609d01fa766c9de2dc22dfee6",
+                "bot": false,
+                "discriminator": "2089",
+                "publicFlags": 0,
+                "system": false,
+                "username": "snake-case-man"
+            },
+            "voiceState": {
+                "id": "195015042926641172",
+                "createdAt": 1466565609438,
+                "channelID": null,
+                "deaf": false,
+                "mute": false,
+                "requestToSpeakTimestamp": null,
+                "selfDeaf": false,
+                "selfMute": false,
+                "selfStream": false,
+                "selfVideo": false,
+                "sessionID": null,
+                "suppress": false
+            }
+        }
+    }
+}
