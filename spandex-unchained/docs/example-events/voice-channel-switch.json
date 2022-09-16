@@ -1,0 +1,112 @@
+{
+    "id": "03913b6b-6621-40f9-b3bf-1b4566c04ac2",
+    "type": "VoiceChannelSwitch",
+    "timestamp": "2022-09-16T10:49:57.088-05:00",
+    "targetChannelId": "1020360878501146634",
+    "sourceUser": "snake-case-man",
+    "content": "snake-case-man switched from channel General to channel [TextVoiceChannel 1020360878501146634]",
+    "metadata": {
+        "member": {
+            "id": "195015042926641172",
+            "createdAt": 1466565609438,
+            "communicationDisabledUntil": null,
+            "joinedAt": 1662133122498,
+            "nick": null,
+            "pending": false,
+            "premiumSince": null,
+            "roles": [],
+            "user": {
+                "id": "195015042926641172",
+                "createdAt": 1466565609438,
+                "avatar": "ffb6c43609d01fa766c9de2dc22dfee6",
+                "bot": false,
+                "discriminator": "2089",
+                "publicFlags": 0,
+                "system": false,
+                "username": "snake-case-man"
+            },
+            "voiceState": {
+                "id": "195015042926641172",
+                "createdAt": 1466565609438,
+                "channelID": "1020360878501146634",
+                "deaf": false,
+                "mute": false,
+                "requestToSpeakTimestamp": null,
+                "selfDeaf": false,
+                "selfMute": false,
+                "selfStream": false,
+                "selfVideo": false,
+                "sessionID": "edd09a53732c9fc3dc5272a56b5b1525",
+                "suppress": false
+            }
+        },
+        "newChannel": {
+            "id": "1020360878501146634",
+            "createdAt": 1663343390823,
+            "type": 2,
+            "name": "second-voice",
+            "nsfw": false,
+            "parentID": "1015284645161599048",
+            "permissionOverwrites": {},
+            "position": 1,
+            "bitrate": 64000,
+            "rtcRegion": null,
+            "userLimit": 0,
+            "voiceMembers": {
+                "195015042926641172": {
+                    "id": "195015042926641172",
+                    "createdAt": 1466565609438,
+                    "communicationDisabledUntil": null,
+                    "joinedAt": 1662133122498,
+                    "nick": null,
+                    "pending": false,
+                    "premiumSince": null,
+                    "roles": [],
+                    "user": {
+                        "id": "195015042926641172",
+                        "createdAt": 1466565609438,
+                        "avatar": "ffb6c43609d01fa766c9de2dc22dfee6",
+                        "bot": false,
+                        "discriminator": "2089",
+                        "publicFlags": 0,
+                        "system": false,
+                        "username": "snake-case-man"
+                    },
+                    "voiceState": {
+                        "id": "195015042926641172",
+                        "createdAt": 1466565609438,
+                        "channelID": "1020360878501146634",
+                        "deaf": false,
+                        "mute": false,
+                        "requestToSpeakTimestamp": null,
+                        "selfDeaf": false,
+                        "selfMute": false,
+                        "selfStream": false,
+                        "selfVideo": false,
+                        "sessionID": "edd09a53732c9fc3dc5272a56b5b1525",
+                        "suppress": false
+                    }
+                }
+            },
+            "lastMessageID": null,
+            "messages": {},
+            "rateLimitPerUser": 0
+        },
+        "oldChannel": {
+            "id": "1015284645643948042",
+            "createdAt": 1662133122598,
+            "type": 2,
+            "name": "General",
+            "parentID": "1015284645161599048",
+            "permissionOverwrites": {},
+            "position": 0,
+            "bitrate": 64000,
+            "rtcRegion": null,
+            "userLimit": 0,
+            "voiceMembers": {},
+            "lastMessageID": null,
+            "messages": {},
+            "rateLimitPerUser": 0
+        }
+    }
+}

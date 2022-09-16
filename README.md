@@ -27,3 +27,4 @@ The primary application in this repo is **`Spandex Unchained`**, a discord bot t
 ## Resources
 
 * [Eris (Discord Library) Docs](https://abal.moe/Eris/docs/0.16.1)
+* [Discord API Docs](https://github.com/discord/discord-api-docs)
