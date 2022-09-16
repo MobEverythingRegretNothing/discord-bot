@@ -28,7 +28,6 @@ const eventPublisherStack: EventPublisherStack = new EventPublisherStack(app,
     }
 );
 
-
 const spandexStack: SpandexStack = new SpandexStack(app, 'SpandexStack', 
 {
     stackName: 'SpandexUnchainedStack',
