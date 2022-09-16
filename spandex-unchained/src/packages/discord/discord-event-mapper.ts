@@ -3,19 +3,24 @@ import { DiscordEvent } from "./discord-event";
 import { DateTime } from 'luxon';
 import { v4 as uuidv4 } from 'uuid';
 
-export function mapMessageEvent(message: Message): DiscordEvent {
+/*****************************
+ *  User-Interaction Events  *
+ *****************************/
+ export function mapUserUpdateEvent(user: User, oldUser: PartialUser | null): DiscordEvent {
     return {
         id: uuidv4(),
-        type: "MessageCreated",
-        timestamp: DateTime.fromMillis(message.timestamp),
-        targetChannelId: message.channel.id,
-        targetMessageId: message.id,
-        sourceEntity: { type: 'User', id: message.author.id },
-        content: message.content,
-        metadata: { message }
+        type: "UserUpdate",
+        timestamp: DateTime.now(),
+        sourceEntity: { type: 'User', id: user.id},
+        targetEntity: { type: 'User', id: user.id},
+        content: `${user.id} updated`,
+        metadata: { user, oldUser }
     };
 }
 
+/*****************************
+ *  Guild-Interaction Events  *
+ *****************************/
 export function mapGuildMemberAddEvent(guild: Guild, member: Member): DiscordEvent {
     return {
         id: uuidv4(),
@@ -56,6 +61,46 @@ export function mapGuildMemberRemoveEvent(guild: Guild, member: Member | MemberP
 
 }
 
+export function mapPresenceUpdateEvent(other: Member | Relationship, oldPresence: Presence | null): DiscordEvent {
+    return {
+        id: uuidv4(),
+        type: "PresenceUpdate",
+        timestamp: DateTime.now(),
+        sourceEntity: { type: 'User', id: other.user.id },
+        content: `${other.user.username} changed their presence`,
+        metadata: { other, oldPresence }
+    };
+}
+
+/*************************************
+ *  Text Channel Interaction Events  *
+ *************************************/
+ export function mapTypingStartEvent(channel: TextChannel, user: User, member: Member): DiscordEvent {
+    return {
+        id: uuidv4(),
+        type: "TypingStart",
+        timestamp: DateTime.now(),
+        targetGuildId: member.guild.id,
+        targetChannelId: channel.id,
+        sourceEntity: { type: 'Member', id: member.id },
+        content: `${user.username} is typing...`,
+        metadata: { channel, user, member }
+    };
+}
+
+export function mapMessageEvent(message: Message): DiscordEvent {
+    return {
+        id: uuidv4(),
+        type: "MessageCreated",
+        timestamp: DateTime.fromMillis(message.timestamp),
+        targetChannelId: message.channel.id,
+        targetMessageId: message.id,
+        sourceEntity: { type: 'User', id: message.author.id },
+        content: message.content,
+        metadata: { message }
+    };
+}
+
 export function mapMessageReactionAddEvent(message: Message, emoji: Emoji, reactor: Member): DiscordEvent {
     return {
         id: uuidv4(),
@@ -70,42 +115,9 @@ export function mapMessageReactionAddEvent(message: Message, emoji: Emoji, react
     };
 }
 
-export function mapUserUpdateEvent(user: User, oldUser: PartialUser | null): DiscordEvent {
-    return {
-        id: uuidv4(),
-        type: "UserUpdate",
-        timestamp: DateTime.now(),
-        sourceEntity: { type: 'User', id: user.id},
-        targetEntity: { type: 'User', id: user.id},
-        content: `${user.id} updated`,
-        metadata: { user, oldUser }
-    };
-}
-
-export function mapPresenceUpdateEvent(other: Member | Relationship, oldPresence: Presence | null): DiscordEvent {
-    return {
-        id: uuidv4(),
-        type: "PresenceUpdate",
-        timestamp: DateTime.now(),
-        sourceEntity: { type: 'User', id: other.user.id },
-        content: `${other.user.username} changed their presence`,
-        metadata: { other, oldPresence }
-    };
-}
-
-export function mapTypingStartEvent(channel: TextChannel, user: User, member: Member): DiscordEvent {
-    return {
-        id: uuidv4(),
-        type: "TypingStart",
-        timestamp: DateTime.now(),
-        targetGuildId: member.guild.id,
-        targetChannelId: channel.id,
-        sourceEntity: { type: 'Member', id: member.id },
-        content: `${user.username} is typing...`,
-        metadata: { channel, user, member }
-    };
-}
-
+/**************************************
+ *  Voice Channel Interaction Events  *
+ **************************************/
 export function mapVoiceChannelJoinEvent(member: Member, channel: VoiceChannel): DiscordEvent {
     return {
         id: uuidv4(),
