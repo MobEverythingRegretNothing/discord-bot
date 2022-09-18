@@ -14,7 +14,7 @@ export class AwsDiscordEventStore implements DiscordEventStore {
     }
 
     public store(event: DiscordEvent): Promise<void> {
-        
+        throw new Error();
     }
 
 }
