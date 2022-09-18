@@ -33,7 +33,13 @@ export class SpandexUnchained {
 
     run(): void {
         try {
-            const spandex: Client = Eris(this.botToken);
+            const spandex: Client = Eris(this.botToken, {
+                intents: ["all"], 
+                autoreconnect: true, 
+                maxReconnectAttempts: 3,
+                maxResumeAttempts: 3,
+                getAllUsers: true
+            });
 
             /***************************
              *  Bot Life-Cycle Events  *
