@@ -68,6 +68,11 @@ jobs:
       shell: bash
       run: yarn install --immutable --immutable-cache --check-cache
 
+    - name: Install Dependencies
+      working-directory: event-handlers/event-storage
+      shell: bash
+      run: yarn install --immutable --immutable-cache --check-cache
+
     ###############
     #  CDK Synth  #
     #############################################################
