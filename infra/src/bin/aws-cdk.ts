@@ -13,15 +13,8 @@ const app: App = new App();
  */
 const token: string = getBotToken(app);
 
-const eventStoreStack: EventStoreStack = new EventStoreStack(app, 'EventStoreStack', 
-{
-    stackName: 'SpandexUnchainedEventStoreStack',
-    description: 'Event store to hold all discord events'
-});
-
 const eventPublisherStack: EventPublisherStack = new EventPublisherStack(app, 
     'EventPublisherStack', 
-    [eventStoreStack.targetBus],
     {
         stackName: 'SpandexUnchainedEventPublisherStack', 
         description: 'EventBridge Stack for Discord Event framework'
@@ -34,4 +27,10 @@ const spandexStack: SpandexStack = new SpandexStack(app, 'SpandexStack',
     description: 'Monitor application stack for the Boneyard',
     eventSourceBus: eventPublisherStack.eventPublisher,
     botToken: token
+});
+
+const eventStoreStack: EventStoreStack = new EventStoreStack(app, 'EventStoreStack', 
+{
+    stackName: 'SpandexUnchainedEventStoreStack',
+    description: 'Event store to hold all discord events'
 });

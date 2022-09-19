@@ -87,6 +87,6 @@ jobs:
     # Deploys the CloudFormation template from the previous     #
     # to AWS in order to generate the Stacks.                   #
     #############################################################
-    # - name: Deploy Infrastructure (AWS CDK)
-    #   working-directory: infra
-    #   run: cdk deploy --all --require-approval never 
+    - name: Deploy Infrastructure (AWS CDK)
+      working-directory: infra
+      run: cdk deploy --all --require-approval never 
