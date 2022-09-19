@@ -1,6 +1,6 @@
 import { App, RemovalPolicy, Stack, StackProps } from 'aws-cdk-lib';
 import { EventBus, Rule } from 'aws-cdk-lib/aws-events';
-import { EventBus as EventBusTarget, CloudWatchLogGroup } from 'aws-cdk-lib/aws-events-targets';
+import { CloudWatchLogGroup } from 'aws-cdk-lib/aws-events-targets';
 import { LogGroup } from 'aws-cdk-lib/aws-logs';
  
 /**

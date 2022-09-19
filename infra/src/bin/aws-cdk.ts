@@ -32,5 +32,6 @@ const spandexStack: SpandexStack = new SpandexStack(app, 'SpandexStack',
 const eventStoreStack: EventStoreStack = new EventStoreStack(app, 'EventStoreStack', 
 {
     stackName: 'SpandexUnchainedEventStoreStack',
-    description: 'Event store to hold all discord events'
+    description: 'Event store to hold all discord events',
+    eventSourceBus: eventPublisherStack.eventPublisher
 });
