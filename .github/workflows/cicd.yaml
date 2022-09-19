@@ -82,5 +82,5 @@ jobs:
     - name: Deploy Infrastructure (AWS CDK)
       working-directory: infra
       run: |
-        cdk bootstrap
+        cdk bootstrap --context botToken=${{ secrets.BOT_TOKEN }}
         cdk deploy --all --require-approval never --context botToken=${{ secrets.BOT_TOKEN }}
