@@ -74,19 +74,6 @@ jobs:
       run: yarn install --immutable --immutable-cache --check-cache
 
     ###############
-    #  CDK Synth  #
-    #############################################################
-    # Creates a cloudformation template via the Typescript CDK  #
-    # and allows utilization of context.                        #
-    #     NOTE: Github Actions provides AWS CLI by default      #
-    #     NOTE: Synth comes before Deploy in the cdk lifecycle  #
-    #############################################################
-    - name: Synthesize Infrastructure w/Context (AWS CDK)
-      working-directory: infra
-      shell: bash
-      run: cdk synth --context botToken=${{ secrets.BOT_TOKEN }}
-
-    ###############
     #  CDK Deploy #
     #############################################################
     # Deploys the CloudFormation template from the previous     #
@@ -94,4 +81,4 @@ jobs:
     #############################################################
     - name: Deploy Infrastructure (AWS CDK)
       working-directory: infra
-      run: cdk deploy --all --require-approval never 
+      run: cdk deploy --all --require-approval never --context botToken=${{ secrets.BOT_TOKEN }}
