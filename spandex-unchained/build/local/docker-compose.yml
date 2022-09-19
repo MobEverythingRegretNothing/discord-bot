@@ -1,8 +1,0 @@
-# Docker compose file to spin up all the local infrastructure necessary to test
-
-# Local AmazonLinux for Spandex Discord Monitor
-# Local NoSQL Database (Message Store) to simulate DynamoDB
-# Local EventBridge (or mock EventBridge) to simulate event infra
-
-# ? Can we use LocalStack to test these?
-# https://onexlab-io.medium.com/localstack-dynamodb-8befdaac802b

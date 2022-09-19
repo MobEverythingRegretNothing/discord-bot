@@ -13,10 +13,9 @@ The primary application in this repo is **`Spandex Unchained`**, a discord bot t
 
 - [ ] Event Store Design (DynamoDB)
 - [ ] Write Spanex Unchained (EC2/Docker) CDK Code
-- [ ] Verify & Test EventBridge
-  - [ ] Same Account
-  - [ ] Cross Account
-- [ ] Finalize event structure
+- [ x ] Verify & Test EventBridge
+  - [ x ] Same Account
+- [ x ] Finalize event structure
 - [ ] Get bot into Boneyard with right permissions
 - [ ] Get examples of all the important events
 
