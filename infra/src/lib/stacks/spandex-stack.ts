@@ -57,11 +57,11 @@ export class SpandexStack extends Stack {
         });
 
         // Create an SSH Key Pair
-        const key = new KeyPair(this, 'A-Key-Pair', {
-            name: 'SpandexKeyPair',
-            description: 'Key Pair to log into Spandex',
-            storePublicKey: true
-        });
+        // const key = new KeyPair(this, 'CharlesLocal', {
+        //     name: 'SpandexKeyPair',
+        //     description: 'Key Pair to log into Spandex',
+        //     storePublicKey: true
+        // });
 
         // Create EC2 Instance w/Docker Image 
         this.service = new Instance(this, 'SpandexUnchained', {
@@ -73,8 +73,7 @@ export class SpandexStack extends Stack {
                 subnetType: SubnetType.PUBLIC
             },
             role: webserverRole,
-            securityGroup: webserverSG,
-            keyName: key.keyPairName,
+            securityGroup: webserverSG
             // init: CloudFormationInit.fromElements(
             //     InitCommand.shellCommand('yum -y install tar gzip'),
             //     InitCommand.shellCommand('sL https://rpm.nodesource.com/setup_${NODE_VERSION} | bash'),
