@@ -69,16 +69,17 @@ export class SpandexStack extends Stack {
             role: webserverRole,
             securityGroup: webserverSG,
             keyName: key.keyPairName,
-            init: CloudFormationInit.fromElements(
-                InitCommand.shellCommand('yum -y install tar gzip'),
-                InitCommand.shellCommand('sL https://rpm.nodesource.com/setup_${NODE_VERSION} | bash'),
-                InitCommand.shellCommand('yum -y install nodejs'),
-                InitCommand.shellCommand('npm install -g yarn'),
-                InitCommand.shellCommand('mkdir app'),
-                InitCommand.shellCommand(`aws s3 cp s3://${props.env?.account}-${props.env?.region}-spandex-source-repo ./app --recursive`),
-                InitCommand.shellCommand(`yarn --cwd ./app install`),
-                InitCommand.shellCommand(`yarn --cwd ./app start:local`)
-            )}
+            // init: CloudFormationInit.fromElements(
+            //     InitCommand.shellCommand('yum -y install tar gzip'),
+            //     InitCommand.shellCommand('sL https://rpm.nodesource.com/setup_${NODE_VERSION} | bash'),
+            //     InitCommand.shellCommand('yum -y install nodejs'),
+            //     InitCommand.shellCommand('npm install -g yarn'),
+            //     InitCommand.shellCommand('mkdir app'),
+            //     InitCommand.shellCommand(`aws s3 cp s3://${props.env?.account}-${props.env?.region}-spandex-source-repo ./app --recursive`),
+            //     InitCommand.shellCommand(`yarn --cwd ./app install`),
+            //     InitCommand.shellCommand(`yarn --cwd ./app start:local`)
+            // )
+        }
         );
     }
 
