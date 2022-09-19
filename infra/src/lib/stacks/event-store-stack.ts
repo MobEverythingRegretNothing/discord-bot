@@ -16,8 +16,6 @@ export class EventStoreStack extends Stack {
 
     readonly eventStorer: NodejsFunction;
 
-    readonly targetBus: EventBus;
-
     constructor(scope: App, id: string, props: EventStoreStackProps) {
         super(scope, id, props);
 
@@ -38,29 +36,14 @@ export class EventStoreStack extends Stack {
             }
         });
 
-        // Create Target Event Bus to receive Discord Events
-        this.targetBus = new EventBus(this, 'EventStoreTargetBus', {
-            eventBusName: 'EventStoreTargetBus'
-        });
-
-        // Allow Bot Event Bus to Trigger this Event Bus
-        new Rule(this, 'SpandexEventBusTriggerRule', {
-            ruleName: 'SpandexEventBusTriggerRule',
-            description: 'Rule allowing the Spandex bot event bus to send messages to this event handler bus',
-            eventBus: props.eventSourceBus,
-            eventPattern: { source: [`SpandexUnchained`] },
-            targets: [new BusTarget(this.targetBus)],
-            enabled: true
-        });
-
         // Trigger lambda from target bus via Rule
         new Rule(this, 'EventStoreTriggerRule', {
             ruleName: 'EventStoreTriggerRule',
             description: 'Rule allowing the event storer lambda to be triggered by the attached bus',
-            eventBus: this.targetBus,
+            eventBus: props.eventSourceBus,
             eventPattern: { source: [`SpandexUnchained`] },
             targets: [new LambdaFunction(this.eventStorer)],
-            enabled: true,
+            enabled: true
         });
     }
 
