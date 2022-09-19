@@ -15,8 +15,8 @@ export class SourceStack extends Stack {
     constructor(scope: App, id: string, props: StackProps) {
         super(scope, id, props);
 
-        this.sourceRepo = new Bucket(this, 'SpandexSourceRepository', {
-            bucketName: `${props.env?.account!}-${props.env?.region!}-SpandexSourceRepository`,
+        this.sourceRepo = new Bucket(this, 'spandex-source-repo', {
+            bucketName: `${props.env?.account!}-${props.env?.region!}-spandex-source-repo`,
             removalPolicy: RemovalPolicy.DESTROY,
             lifecycleRules: [{expiration: Duration.days(1)}],
             versioned: true
