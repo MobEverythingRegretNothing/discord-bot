@@ -1,15 +1,10 @@
 import { App, Duration, RemovalPolicy, Stack, StackProps } from 'aws-cdk-lib';
-import { EventBus } from 'aws-cdk-lib/aws-events';
 import { Bucket } from 'aws-cdk-lib/aws-s3';
 import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
 import path from 'path';
-
-export interface EventStoreStackProps extends StackProps {
-    eventSourceBus: EventBus;
-} 
  
 /**
- * Infrastructure for EventStore goes in this siloed stack
+ * Infrastructure for Source Code Bucket goes in this siloed stack
  */
 export class SourceStack extends Stack {
 
@@ -17,7 +12,7 @@ export class SourceStack extends Stack {
 
     readonly sourceDeployment: BucketDeployment;
 
-    constructor(scope: App, id: string, props: EventStoreStackProps) {
+    constructor(scope: App, id: string, props: StackProps) {
         super(scope, id, props);
 
         this.sourceRepo = new Bucket(this, 'SpandexSourceRepository', {

@@ -1,4 +1,5 @@
 import { App } from "aws-cdk-lib";
+import { SourceStack } from "src/lib/stacks/source-stack";
 import { getBotToken } from "../lib/config/environment-config";
 import { EventPublisherStack } from "../lib/stacks/event-publisher-stack";
 import { EventStoreStack } from "../lib/stacks/event-store-stack";
@@ -12,6 +13,14 @@ const app: App = new App();
  *  - botToken      | Discord token for the bot
  */
 const token: string = getBotToken(app);
+
+const sourceStack: SourceStack = new SourceStack(app, 
+    'SpandexUnchainedSourceStack',
+    {
+        stackName: 'SpandexUnchainedSourceStack',
+        description: 'Source folder for Bot Code'
+    }
+);
 
 const eventPublisherStack: EventPublisherStack = new EventPublisherStack(app, 
     'EventPublisherStack', 
