@@ -17,7 +17,11 @@ const eventPublisherStack: EventPublisherStack = new EventPublisherStack(app,
     'EventPublisherStack', 
     {
         stackName: 'SpandexUnchainedEventPublisherStack', 
-        description: 'EventBridge Stack for Discord Event framework'
+        description: 'EventBridge Stack for Discord Event framework',
+        env: { 
+            account: process.env.CDK_DEFAULT_ACCOUNT, 
+            region: process.env.CDK_DEFAULT_REGION 
+        }
     }
 );
 
@@ -26,12 +30,20 @@ const spandexStack: SpandexStack = new SpandexStack(app, 'SpandexStack',
     stackName: 'SpandexUnchainedStack',
     description: 'Monitor application stack for the Boneyard',
     eventSourceBus: eventPublisherStack.eventPublisher,
-    botToken: token
+    botToken: token,
+    env: { 
+        account: process.env.CDK_DEFAULT_ACCOUNT, 
+        region: process.env.CDK_DEFAULT_REGION 
+    }
 });
 
 const eventStoreStack: EventStoreStack = new EventStoreStack(app, 'EventStoreStack', 
 {
     stackName: 'SpandexUnchainedEventStoreStack',
     description: 'Event store to hold all discord events',
-    eventSourceBus: eventPublisherStack.eventPublisher
+    eventSourceBus: eventPublisherStack.eventPublisher,
+    env: { 
+        account: process.env.CDK_DEFAULT_ACCOUNT, 
+        region: process.env.CDK_DEFAULT_REGION 
+    }
 });
