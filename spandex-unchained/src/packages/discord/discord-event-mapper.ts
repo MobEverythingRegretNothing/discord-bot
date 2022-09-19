@@ -13,7 +13,6 @@ import { v4 as uuidv4 } from 'uuid';
         timestamp: DateTime.now(),
         sourceEntity: { type: 'User', id: user.id},
         targetEntity: { type: 'User', id: user.id},
-        content: `${user.id} updated`,
         metadata: { user, oldUser }
     };
 }
@@ -29,7 +28,6 @@ export function mapGuildMemberAddEvent(guild: Guild, member: Member): DiscordEve
         targetGuildId: guild.id,
         sourceEntity: { type: 'Member', id: guild.ownerID },
         targetEntity: { type: 'Member', id: member.id },
-        content: `${member.username} added to guild ${guild.name}`,
         metadata: { guild, member }
     };
 }
@@ -42,7 +40,6 @@ export function mapGuildMemberUpdateEvent(guild: Guild, member: Member, oldMembe
         targetGuildId: guild.id,
         sourceEntity: { type: 'Member', id: guild.ownerID },
         targetEntity: { type: 'Member', id: member.id },
-        content: `${member.username} updated for guild ${guild.name}`,
         metadata: { guild, member, oldMember }
     };
 }
@@ -55,7 +52,6 @@ export function mapGuildMemberRemoveEvent(guild: Guild, member: Member | MemberP
         targetGuildId: guild.id,
         sourceEntity: { type: 'Member', id: guild.ownerID },
         targetEntity: { type: 'Member', id: member.id },
-        content: `${member.id} removed for guild ${guild.name}`,
         metadata: { guild, member }
     };
 
@@ -67,7 +63,6 @@ export function mapPresenceUpdateEvent(other: Member | Relationship, oldPresence
         type: "PresenceUpdate",
         timestamp: DateTime.now(),
         sourceEntity: { type: 'User', id: other.user.id },
-        content: `${other.user.username} changed their presence`,
         metadata: { other, oldPresence }
     };
 }
@@ -83,7 +78,6 @@ export function mapPresenceUpdateEvent(other: Member | Relationship, oldPresence
         targetGuildId: member.guild.id,
         targetChannelId: channel.id,
         sourceEntity: { type: 'Member', id: member.id },
-        content: `${user.username} is typing...`,
         metadata: { channel, user, member }
     };
 }
@@ -96,7 +90,6 @@ export function mapMessageEvent(message: Message): DiscordEvent {
         targetChannelId: message.channel.id,
         targetMessageId: message.id,
         sourceEntity: { type: 'User', id: message.author.id },
-        content: message.content,
         metadata: { message }
     };
 }
@@ -110,7 +103,6 @@ export function mapMessageReactionAddEvent(message: Message, emoji: Emoji, react
         targetMessageId: message.id,
         sourceEntity: { type: 'Member', id: reactor.id },
         targetEntity: { type: 'User', id: message.author.id },
-        content: JSON.stringify(emoji),
         metadata: { message, emoji, reactor }
     };
 }
@@ -126,7 +118,6 @@ export function mapVoiceChannelJoinEvent(member: Member, channel: VoiceChannel):
         targetGuildId: member.guild.id,
         targetChannelId: channel.id,
         sourceEntity: { type: 'Member', id: member.id },
-        content: `${member.username} joined the ${channel.name} channel`,
         metadata: { member, channel }
     };
 }
@@ -139,7 +130,6 @@ export function mapVoiceChannelLeaveEvent(member: Member, channel: VoiceChannel)
         targetGuildId: member.guild.id,
         targetChannelId: channel.id,
         sourceEntity: { type: 'Member', id: member.id },
-        content: `${member.username} left the ${channel.name} channel`,
         metadata: { member, channel }
     };
 }
@@ -152,7 +142,6 @@ export function mapVoiceChannelSwitchEvent(member: Member, newChannel: VoiceChan
         targetGuildId: member.guild.id,
         targetChannelId: newChannel.id,
         sourceEntity: { type: 'Member', id: member.id },
-        content: `${member.username} switched from channel ${oldChannel.name} to channel ${newChannel}`,
         metadata: { member, newChannel, oldChannel }
     };
 }

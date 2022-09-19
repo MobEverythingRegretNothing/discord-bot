@@ -14,7 +14,9 @@ export class AwsDiscordEventStore implements DiscordEventStore {
     }
 
     public store(event: DiscordEvent): Promise<void> {
-        throw new Error();
+        console.log(`Received Event!`);
+        console.log(JSON.stringify(event));
+        return Promise.resolve();
     }
 
 }
