@@ -14,7 +14,7 @@ export interface SpandexProps extends StackProps {
  
 export class SpandexStack extends Stack {
 
-    // readonly service: Instance;
+    readonly service: Instance;
 
     constructor(scope: App, id: string, props: SpandexProps) {
         super(scope, id, props);
@@ -57,27 +57,29 @@ export class SpandexStack extends Stack {
             storePublicKey: true
         });
 
-        // // Create EC2 Instance w/Docker Image 
-        // this.service = new Instance(this, 'SpandexUnchained', {
-        //     instanceName: 'SpandexUnchained',
-        //     instanceType: new InstanceType('t2.nano'), 
-        //     machineImage: MachineImage.latestAmazonLinux(),
-        //     vpc: defaultVpc,
-        //     vpcSubnets: {
-        //         subnetType: SubnetType.PUBLIC
-        //     },
-        //     role: webserverRole,
-        //     securityGroup: webserverSG,
-        //     keyName: key.keyPairName,
-        //     init: CloudFormationInit.fromElements(
-        //         InitCommand.shellCommand('yum -y install tar gzip'),
-        //         InitCommand.shellCommand('sL https://rpm.nodesource.com/setup_${NODE_VERSION} | bash'),
-        //         InitCommand.shellCommand('yum -y install nodejs'),
-        //         InitCommand.shellCommand('npm install -g yarn'),
-        //         InitCommand.shellCommand('npm install -g yarn'),
-
-        //     )}
-        // );
+        // Create EC2 Instance w/Docker Image 
+        this.service = new Instance(this, 'SpandexUnchained', {
+            instanceName: 'SpandexUnchained',
+            instanceType: new InstanceType('t2.nano'), 
+            machineImage: MachineImage.latestAmazonLinux(),
+            vpc: defaultVpc,
+            vpcSubnets: {
+                subnetType: SubnetType.PUBLIC
+            },
+            role: webserverRole,
+            securityGroup: webserverSG,
+            keyName: key.keyPairName,
+            init: CloudFormationInit.fromElements(
+                InitCommand.shellCommand('yum -y install tar gzip'),
+                InitCommand.shellCommand('sL https://rpm.nodesource.com/setup_${NODE_VERSION} | bash'),
+                InitCommand.shellCommand('yum -y install nodejs'),
+                InitCommand.shellCommand('npm install -g yarn'),
+                InitCommand.shellCommand('mkdir app'),
+                InitCommand.shellCommand(`aws s3 cp s3://${props.env?.account}-${props.env?.region}-spandex-source-repo ./app --recursive`),
+                InitCommand.shellCommand(`yarn --cwd ./app install`),
+                InitCommand.shellCommand(`yarn --cwd ./app start:local`)
+            )}
+        );
     }
 
 }
