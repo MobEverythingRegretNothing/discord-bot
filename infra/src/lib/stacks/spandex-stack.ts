@@ -29,6 +29,12 @@ export class SpandexStack extends Stack {
             vpc: defaultVpc,
             allowAllOutbound: true
           });
+
+          webserverSG.addIngressRule(
+            Peer.anyIpv4(),
+            Port.tcp(22),
+            'allow SSH traffic from anywhere'
+          );
       
           webserverSG.addIngressRule(
             Peer.anyIpv4(),
