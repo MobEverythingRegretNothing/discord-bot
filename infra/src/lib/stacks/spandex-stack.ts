@@ -27,19 +27,19 @@ export class SpandexStack extends Stack {
         // Create Security Group
         const webserverSG = new SecurityGroup(this, 'webserver-sg', {
             vpc: defaultVpc,
-            allowAllOutbound: true,
+            allowAllOutbound: true
           });
       
           webserverSG.addIngressRule(
             Peer.anyIpv4(),
             Port.tcp(80),
-            'allow HTTP traffic from anywhere',
+            'allow HTTP traffic from anywhere'
           );
       
           webserverSG.addIngressRule(
             Peer.anyIpv4(),
             Port.tcp(443),
-            'allow HTTPS traffic from anywhere',
+            'allow HTTPS traffic from anywhere'
           );
 
         // 👇 create a Role for the EC2 Instance
@@ -47,7 +47,7 @@ export class SpandexStack extends Stack {
             assumedBy: new ServicePrincipal('ec2.amazonaws.com'),
             managedPolicies: [
                 ManagedPolicy.fromAwsManagedPolicyName('AmazonEventBridgeFullAccess'),
-            ],
+            ]
         });
 
         // Create an SSH Key Pair

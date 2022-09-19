@@ -18,7 +18,11 @@ const sourceStack: SourceStack = new SourceStack(app,
     'SpandexUnchainedSourceStack',
     {
         stackName: 'SpandexUnchainedSourceStack',
-        description: 'Source folder for Bot Code'
+        description: 'Source folder for Bot Code',
+        env: { 
+            account: process.env.CDK_DEFAULT_ACCOUNT, 
+            region: process.env.CDK_DEFAULT_REGION 
+        }
     }
 );
 
