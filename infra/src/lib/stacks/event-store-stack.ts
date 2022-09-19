@@ -43,7 +43,7 @@ export class EventStoreStack extends Stack {
             enabled: true,
             description: 'Rule allowing the event storer lambda to be triggered by the attached bus',
             eventBus: this.targetBus,
-            eventPattern: { source: [`aws.ec2`] },
+            eventPattern: { source: [`SpandexUnchained`] },
             targets: [new LambdaFunction(this.eventStorer)]
         })
     }

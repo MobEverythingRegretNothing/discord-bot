@@ -29,7 +29,7 @@ export class EventPublisherStack extends Stack {
         new Rule(this, "EventLoggingRule", {
             eventBus: this.eventPublisher,
             eventPattern: {
-                source: ["aws.ec2"]
+                source: ["SpandexUnchained"]
             },
             targets: [
               new CloudWatchLogGroup(eventLogs),
