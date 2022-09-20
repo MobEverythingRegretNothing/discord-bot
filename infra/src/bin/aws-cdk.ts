@@ -43,6 +43,7 @@ const spandexStack: SpandexStack = new SpandexStack(app, 'SpandexStack',
     stackName: 'SpandexUnchainedStack',
     description: 'Monitor application stack for the Boneyard',
     eventSourceBus: eventPublisherStack.eventPublisher,
+    sourceRepo: sourceStack.sourceRepo,
     botToken: token,
     env: { 
         account: process.env.CDK_DEFAULT_ACCOUNT, 
