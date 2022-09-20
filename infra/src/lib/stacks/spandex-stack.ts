@@ -59,7 +59,7 @@ export class SpandexStack extends Stack {
         });
 
         // Create an SSH Key Pair
-        const key = new KeyPair(this, 'A-Key-Pair', {
+        const key = new KeyPair(this, 'SpandexKeyPair', {
             name: 'SpandexKeyPair',
             description: 'Key Pair to log into Spandex',
             storePublicKey: true
@@ -78,7 +78,7 @@ export class SpandexStack extends Stack {
             securityGroup: webserverSG,
             keyName: key.keyPairName,
             init: CloudFormationInit.fromElements(
-                InitCommand.shellCommand(`aws s3 cp s3://${props.env?.account}-${props.env?.region}-spandex-source-repo ./app --recursive`),
+                InitCommand.shellCommand(`aws s3 cp s3://${props.sourceRepo.bucketName} ./app --recursive`),
             //     InitCommand.shellCommand('yum -y install tar gzip'),
             //     InitCommand.shellCommand('curl -sL https://rpm.nodesource.com/setup_16.x | bash'),
             //     InitCommand.shellCommand('yum -y install nodejs'),
