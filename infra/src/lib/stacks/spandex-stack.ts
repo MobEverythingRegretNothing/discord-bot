@@ -59,8 +59,8 @@ export class SpandexStack extends Stack {
         });
 
         // Create an SSH Key Pair
-        const key = new KeyPair(this, 'SpandexKeyPair', {
-            name: 'SpandexKeyPair',
+        const key = new KeyPair(this, 'SpandexEc2KeyPair', {
+            name: 'SpandexEc2KeyPair',
             description: 'Key Pair to log into Spandex',
             storePublicKey: true
         });
