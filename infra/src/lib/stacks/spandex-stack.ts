@@ -2,6 +2,7 @@ import { App, Stack, StackProps } from 'aws-cdk-lib';
 import { Instance, MachineImage, Vpc, Peer, Port, SecurityGroup, InstanceType, SubnetType, CloudFormationInit, InitConfig, InitPackage, InitFile, InitCommand } from 'aws-cdk-lib/aws-ec2';
 import { EventBus } from 'aws-cdk-lib/aws-events';
 import { ServicePrincipal, Role, ManagedPolicy } from 'aws-cdk-lib/aws-iam';
+import { Bucket } from 'aws-cdk-lib/aws-s3';
 import { Asset } from 'aws-cdk-lib/aws-s3-assets';
 import { KeyPair } from 'cdk-ec2-key-pair';
 import { readFileSync } from 'fs';
@@ -9,6 +10,7 @@ import path from 'path';
 
 export interface SpandexProps extends StackProps {
     eventSourceBus: EventBus;
+    sourceRepo: Bucket;
     botToken: string;
 } 
  
@@ -75,18 +77,21 @@ export class SpandexStack extends Stack {
             role: webserverRole,
             securityGroup: webserverSG,
             keyName: key.keyPairName,
-            // init: CloudFormationInit.fromElements(
+            init: CloudFormationInit.fromElements(
+                InitCommand.shellCommand(`aws s3 cp s3://${props.env?.account}-${props.env?.region}-spandex-source-repo ./app --recursive`),
             //     InitCommand.shellCommand('yum -y install tar gzip'),
-            //     InitCommand.shellCommand('sL https://rpm.nodesource.com/setup_${NODE_VERSION} | bash'),
+            //     InitCommand.shellCommand('curl -sL https://rpm.nodesource.com/setup_16.x | bash'),
             //     InitCommand.shellCommand('yum -y install nodejs'),
             //     InitCommand.shellCommand('npm install -g yarn'),
             //     InitCommand.shellCommand('mkdir app'),
-            //     InitCommand.shellCommand(`aws s3 cp s3://${props.env?.account}-${props.env?.region}-spandex-source-repo ./app --recursive`),
+
             //     InitCommand.shellCommand(`yarn --cwd ./app install`),
             //     InitCommand.shellCommand(`yarn --cwd ./app start:local`)
-            // )
+            )
         }
         );
+
+        props.sourceRepo.grantRead(this.service);
     }
 
 }
