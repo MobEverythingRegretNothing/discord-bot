@@ -79,7 +79,7 @@ export class SpandexStack extends Stack {
             keyName: key.keyPairName,
             init: CloudFormationInit.fromElements(
                 InitCommand.shellCommand(`aws s3 cp s3://${props.sourceRepo.bucketName} ./app --recursive`),
-            //     InitCommand.shellCommand('yum -y install tar gzip'),
+                InitCommand.shellCommand('yum -y install tar gzip'),
             //     InitCommand.shellCommand('curl -sL https://rpm.nodesource.com/setup_16.x | bash'),
             //     InitCommand.shellCommand('yum -y install nodejs'),
             //     InitCommand.shellCommand('npm install -g yarn'),
