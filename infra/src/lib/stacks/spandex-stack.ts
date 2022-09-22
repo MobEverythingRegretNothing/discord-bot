@@ -1,12 +1,9 @@
 import { App, Stack, StackProps } from 'aws-cdk-lib';
-import { Instance, MachineImage, Vpc, Peer, Port, SecurityGroup, InstanceType, SubnetType, CloudFormationInit, InitConfig, InitPackage, InitFile, InitCommand } from 'aws-cdk-lib/aws-ec2';
+import { Instance, MachineImage, Vpc, Peer, Port, SecurityGroup, InstanceType, SubnetType, CloudFormationInit, InitCommand } from 'aws-cdk-lib/aws-ec2';
 import { EventBus } from 'aws-cdk-lib/aws-events';
 import { ServicePrincipal, Role, ManagedPolicy } from 'aws-cdk-lib/aws-iam';
 import { Bucket } from 'aws-cdk-lib/aws-s3';
-import { Asset } from 'aws-cdk-lib/aws-s3-assets';
 import { KeyPair } from 'cdk-ec2-key-pair';
-import { readFileSync } from 'fs';
-import path from 'path';
 
 export interface SpandexProps extends StackProps {
     eventSourceBus: EventBus;
@@ -55,6 +52,7 @@ export class SpandexStack extends Stack {
             assumedBy: new ServicePrincipal('ec2.amazonaws.com'),
             managedPolicies: [
                 ManagedPolicy.fromAwsManagedPolicyName('AmazonEventBridgeFullAccess'),
+                ManagedPolicy.fromAwsManagedPolicyName('CloudWatchLogsFullAccess')
             ]
         });
 
@@ -78,12 +76,24 @@ export class SpandexStack extends Stack {
             securityGroup: webserverSG,
             keyName: key.keyPairName,
             init: CloudFormationInit.fromElements(
-                InitCommand.shellCommand(`aws s3 cp s3://${props.sourceRepo.bucketName} ./app --recursive`),
-                InitCommand.shellCommand('yum -y install tar gzip'),
-            //     InitCommand.shellCommand('curl -sL https://rpm.nodesource.com/setup_16.x | bash'),
-            //     InitCommand.shellCommand('yum -y install nodejs'),
-            //     InitCommand.shellCommand('npm install -g yarn'),
-            //     InitCommand.shellCommand('mkdir app'),
+
+                // Update Package Manager
+                InitCommand.shellCommand(`sudo yum update -y`),
+                
+                // Setup Logging
+                InitCommand.shellCommand(`sudo wget https://s3.amazonaws.com/amazoncloudwatch-agent/amazon_linux/amd64/latest/amazon-cloudwatch-agent.rpm`),
+                InitCommand.shellCommand(`sudo rpm -U /opt/amazon-cloudwatch-agent.rpm`),
+                InitCommand.shellCommand(`sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:common-config.toml`),
+
+                // Install NodeJS 16 & npm
+                InitCommand.shellCommand('sudo yum -y install tar gzip'),
+                InitCommand.shellCommand('curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash')
+            ,
+                InitCommand.shellCommand('. ~/.nvm/nvm.sh'),
+                InitCommand.shellCommand('nvm install 16'),
+
+                // Retrieve Application
+                InitCommand.shellCommand(`aws s3 cp s3://${props.sourceRepo.bucketName} /home/ec2-user/spandex --recursive`),
 
             //     InitCommand.shellCommand(`yarn --cwd ./app install`),
             //     InitCommand.shellCommand(`yarn --cwd ./app start:local`)
